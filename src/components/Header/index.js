@@ -3,8 +3,8 @@ import module from './Header.module.css';
 
 export default function Header() {
     return (
-        <ul class={`nav nav-pills ${module.nav}`}>
-            <li class="nav-item">
+        <ul className={`nav nav-pills ${module.nav}`}>
+            <li className="nav-item">
                 <NavLink
                     to="/"
                     className={({ isActive }) =>
@@ -14,7 +14,7 @@ export default function Header() {
                     Músicas
                 </NavLink>
             </li>
-            <li class={`nav-item ${module.navItem}`}>
+            <li className={`nav-item ${module.navItem}`}>
                 <NavLink
                     to="/repertoires"
                     className={({ isActive }) =>

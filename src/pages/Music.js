@@ -1,9 +1,11 @@
+import { MusicContext } from "contexts/Music";
+import { useContext } from "react";
 import { useParams } from "react-router-dom"
-import { fetch } from 'services/musicService'
 
 export default function Music() {
     const params = useParams();
-    const music = fetch(parseInt(params.musicId));
+    const { musics } = useContext(MusicContext);
+    const music = musics.find((music) => music.id === parseInt(params.musicId));
     
     return (
         <div className="container">

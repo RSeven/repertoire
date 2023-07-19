@@ -4,15 +4,23 @@ import Musics from 'pages/Musics';
 import Music from 'pages/Music';
 import Repertoires from 'pages/Repertoires';
 import Repertoire from 'pages/Repertoire';
+import CreateMusic from 'pages/CreateMusic';
+import { MusicContextLayout } from 'contexts/Music';
+import { RepertoireContextLayout } from 'contexts/Repertoire';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index element={ <Musics /> } />
-        <Route path='music/:musicId' element={ <Music /> } />
-        <Route path='repertoires' element={ <Repertoires /> } />
-        <Route path='repertoire/:repertoireId' element={ <Repertoire /> } />
+        <Route element={<MusicContextLayout />}>
+          <Route index element={ <Musics /> } />
+          <Route path='music/:musicId' element={ <Music /> } />
+          <Route path='music/create' element={ <CreateMusic /> } />
+        </Route>
+        <Route element={<RepertoireContextLayout />}>
+          <Route path='repertoires' element={ <Repertoires /> } />
+          <Route path='repertoire/:repertoireId' element={ <Repertoire /> } />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

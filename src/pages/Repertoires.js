@@ -1,10 +1,10 @@
 import Header from 'components/Header';
-import default_repertoires from "repertoires.json";
-import { useState } from 'react';
+import { useContext } from 'react';
 import RepertoireCard from 'components/RepertoireCard';
+import { RepertoireContext } from 'contexts/Repertoire';
 
 export default function Repertoires() {
-    const [repertoires, setRepertoires] = useState(default_repertoires)
+    const { repertoires } = useContext(RepertoireContext)
 
     return (
         <div className="container">
