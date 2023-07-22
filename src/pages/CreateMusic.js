@@ -6,19 +6,30 @@ import { useContext } from "react";
 export default function CreateMusic() {
     const { musics, setMusics } = useContext(MusicContext);
 
-    const onCreateMusic = (ev) => {
+    const onCreateMusic = async (ev) => {
         ev.preventDefault();
-        setMusics([...musics, {
-            id: musics[musics.length - 1].id + 1,
-            name: ev.target.elements.name.value,
-            lyrics: ev.target.elements.lyrics.value
-        }])
+        const name = ev.target.elements.name.value;
+        const lyrics = ev.target.elements.lyrics.value;
+
+        fetch(`http://localhost:8080/musics`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, lyrics })
+        }).then(() => {
+            setMusics([...musics, {
+                id: musics[musics.length - 1].id + 1,
+                name,
+                lyrics
+            }])
+        }).catch((error) => console.log(error))
     }    
 
     return (
         <div className="container">
             <MusicForm onSubmit={onCreateMusic} />
-            <BSLink color='primary' to='/'>Voltar</BSLink>
+            <div className="mt-2">
+                <BSLink color='primary' to='/'>Voltar</BSLink>
+            </div>
         </div>
     )
 }

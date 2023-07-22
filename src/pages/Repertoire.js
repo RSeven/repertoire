@@ -1,15 +1,28 @@
 import BSLink from "components/BSLink";
 import MusicList from "components/MusicList";
 import { RepertoireContext } from "contexts/Repertoire";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 
 export default function Repertoire() {
     const params = useParams()
-    const { repertoires } = useContext(RepertoireContext)
-    const repertoire = repertoires.find((repertoire) => repertoire.id === parseInt(params.repertoireId))
-    const [musics, setMusics] = useState(repertoire.musics);
+    const { repertoires, loading } = useContext(RepertoireContext)
+    const [musics, setMusics] = useState([]);
+    const [repertoire, setRepertoire] = useState({}) 
     
+    useEffect(() => {
+        console.log('loading', loading)
+        if(!loading) {
+            console.log('repertoires', repertoires)
+            setRepertoire(repertoires.find((repertoire) => repertoire.id === parseInt(params.repertoireId)))
+        }
+    }, [repertoires, loading, params.repertoireId])
+
+    useEffect(() => {
+        console.log('repertoire', repertoire)
+        setMusics(repertoire.musics)
+    }, [repertoire])
+
     return (
         <div className="container">
             <h1>{repertoire.name}</h1>

@@ -3,11 +3,16 @@ import Header from 'components/Header';
 import MusicList from 'components/MusicList';
 import Search from 'components/Search';
 import { MusicContext } from 'contexts/Music';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 export default function Musics() {
-    const { musics } = useContext(MusicContext);
-    const [filteredMusics, setFilteredMusics] = useState(musics);
+    const { musics, loading } = useContext(MusicContext);
+    const [filteredMusics, setFilteredMusics] = useState([]);
+
+    useEffect(() => {
+        if(!loading) setFilteredMusics(musics);
+    }, [loading, musics])
+
 
     const onChange = (value) => {
         const normalizedValue = value.toLowerCase();

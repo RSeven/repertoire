@@ -1,6 +1,6 @@
 export default function MusicForm({ onSubmit }) {
     return (
-        <div className="container">    
+        <>    
             <form onSubmit={(ev) => { ev.preventDefault(); onSubmit(ev); } }>
                 <div className="m-1">
                     <label for="name">Nome</label>
@@ -14,6 +14,6 @@ export default function MusicForm({ onSubmit }) {
                     <button type="submit" className="btn btn-primary">Adicionar Música</button>
                 </div>
             </form>
-        </div>
+        </>
     )
 }

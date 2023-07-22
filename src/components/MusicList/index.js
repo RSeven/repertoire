@@ -11,7 +11,7 @@ export default function MusicList({ musics, setMusics }) {
         onDrop,
     });
 
-    return (
+    return (musics &&
         <>
             {musics.map((music, idx) => <MusicCard context={context} key={music.id} music={music} index={idx} />)}
         </>

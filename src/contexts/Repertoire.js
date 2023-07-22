@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import default_repertoires from 'repertoires.json';
 import { Outlet } from 'react-router-dom';
 
@@ -8,8 +8,25 @@ RepertoireContext.displayName = 'Repertoire';
 
 export const RepertoireProvider = ({children}) => {
     const [repertoires, setRepertories] = useState(default_repertoires);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchData() {
+            fetch(`http://localhost:8080/setlists`)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('setData')
+                setRepertories(data);
+                setLoading(false);
+            })
+            .catch((error) => console.log('error fetching repertoires', error))   
+        }
+
+        fetchData()
+    }, [])
+
     return (
-        <RepertoireContext.Provider value={{ repertoires, setRepertories }}>
+        <RepertoireContext.Provider value={{ repertoires, setRepertories, loading }}>
             {children}
         </RepertoireContext.Provider>
     )

@@ -1,15 +1,20 @@
 import Header from 'components/Header';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import RepertoireCard from 'components/RepertoireCard';
 import { RepertoireContext } from 'contexts/Repertoire';
 
 export default function Repertoires() {
-    const { repertoires } = useContext(RepertoireContext)
+    const { repertoires, loading } = useContext(RepertoireContext)
+    const [fetchedRepertoires, setFetchedRepertoires] = useState([])
+
+    useEffect(() => {
+        if(!loading) setFetchedRepertoires(repertoires);
+    }, [loading, repertoires])
 
     return (
         <div className="container">
             <Header />
-            {repertoires.map((repertoire) => <RepertoireCard key={repertoire.id} repertoire={repertoire} />)}
+            {fetchedRepertoires.map((repertoire) => <RepertoireCard key={repertoire.id} repertoire={repertoire} />)}
         </div>
     );
 }
