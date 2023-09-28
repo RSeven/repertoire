@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Draggable, useDraggable } from "react-tiny-dnd";
 import module from './MusicCard.module.css'
 import BSLink from "components/BSLink";
-import { CardList } from "react-bootstrap-icons";
+import { CardList, Pencil } from "react-bootstrap-icons";
 
 export default function MusicCard({ context, music, index }) {
     const {
@@ -14,8 +14,13 @@ export default function MusicCard({ context, music, index }) {
         <Draggable context={context} key={music.id} index={index}>
             <div className={module.item} {...listeners} style={{ backgroundColor: '#eee', opacity: isDragging ? 0.5 : 1 }}>
                 <Link to={`/music/${music.id}`}>{music.name}</Link>
-                <div className="mt-2">
-                    <BSLink className='ml-auto' color='primary' to='/music/1'><CardList /></BSLink>
+                <div className="mt-2 row">
+                    <div className="col-auto">
+                        <BSLink color='primary' to={`/music/${music.id}`}><CardList /></BSLink>
+                    </div>
+                    <div className="col-auto">
+                        <BSLink color='success' to={`/music/update/${music.id}`}><Pencil /></BSLink>
+                    </div>
                 </div>
             </div>
         </Draggable>

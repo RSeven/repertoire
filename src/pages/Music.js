@@ -16,7 +16,7 @@ export default function Music() {
         <div className="container">
             <BackButton />
             <h1>{music.name}</h1>
-            <pre>{music.lyrics}</pre>
+            <pre>{music.chords}</pre>
             <BackButton />
         </div>
     )

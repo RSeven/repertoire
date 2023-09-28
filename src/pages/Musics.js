@@ -32,6 +32,7 @@ export default function Musics() {
                     <BSLink color='primary' to='/music/create'>Nova música</BSLink>
                 </div>
             </div>
+            <h3>{filteredMusics.length} músicas</h3>
             <MusicList musics={filteredMusics} setMusics={setFilteredMusics} />
         </div>
     );

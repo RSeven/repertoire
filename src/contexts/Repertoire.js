@@ -15,11 +15,10 @@ export const RepertoireProvider = ({children}) => {
             fetch(`http://localhost:8080/setlists`)
             .then((response) => response.json())
             .then((data) => {
-                console.log('setData')
                 setRepertories(data);
                 setLoading(false);
             })
-            .catch((error) => console.log('error fetching repertoires', error))   
+            .catch((error) => console.log('error fetching repertoires', error))
         }
 
         fetchData()

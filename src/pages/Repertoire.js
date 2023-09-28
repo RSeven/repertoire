@@ -11,15 +11,12 @@ export default function Repertoire() {
     const [repertoire, setRepertoire] = useState({}) 
     
     useEffect(() => {
-        console.log('loading', loading)
         if(!loading) {
-            console.log('repertoires', repertoires)
             setRepertoire(repertoires.find((repertoire) => repertoire.id === parseInt(params.repertoireId)))
         }
     }, [repertoires, loading, params.repertoireId])
 
     useEffect(() => {
-        console.log('repertoire', repertoire)
         setMusics(repertoire.musics)
     }, [repertoire])
 

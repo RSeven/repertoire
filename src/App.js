@@ -7,6 +7,7 @@ import Repertoire from 'pages/Repertoire';
 import CreateMusic from 'pages/CreateMusic';
 import { MusicContextLayout } from 'contexts/Music';
 import { RepertoireContextLayout } from 'contexts/Repertoire';
+import UpdateMusic from 'pages/UpdateMusic';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route index element={ <Musics /> } />
           <Route path='music/:musicId' element={ <Music /> } />
           <Route path='music/create' element={ <CreateMusic /> } />
+          <Route path='music/update/:musicId' element={ <UpdateMusic /> } />
         </Route>
         <Route element={<RepertoireContextLayout />}>
           <Route path='repertoires' element={ <Repertoires /> } />
