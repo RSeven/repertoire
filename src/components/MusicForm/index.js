@@ -51,11 +51,11 @@ export default function MusicForm({ onSubmit, name, setName, lyrics, setLyrics, 
                     />
                 </div>
                 <div className="m-1">
-                    <label htmlFor="lyrics">Letra</label> ( <a href="#" onClick={(ev) => fetchLyrics(ev)}>auto-preencher</a> )
+                    <label htmlFor="lyrics">Letra</label> <button className="btn btn-link p-0 align-top" onClick={(ev) => fetchLyrics(ev)}>auto-preencher</button>
                     <textarea name="lyrics" value={lyrics} onChange={(ev) => onChangeLyrics(ev)} placeholder="Adicione a letra..." className="form-control"></textarea>
                 </div>
                 <div className="m-1">
-                    <label htmlFor="chords">Cifra</label> ( <a href="#" onClick={(ev) => fetchChords(ev)}>auto-preencher</a> )
+                    <label htmlFor="chords">Cifra</label> <button className="btn btn-link p-0 align-top" onClick={(ev) => fetchChords(ev)}>auto-preencher</button>
                     <textarea name="chords" value={chords} onChange={(ev) => onChangeChords(ev)} placeholder="Adicione a cifra..." className="form-control"></textarea>
                 </div>
                 <div className="mt-4">

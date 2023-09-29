@@ -7,16 +7,16 @@ export const RepertoireContext = createContext();
 RepertoireContext.displayName = 'Repertoire';
 
 export const RepertoireProvider = ({children}) => {
-    const [repertoires, setRepertories] = useState(default_repertoires);
-    const [loading, setLoading] = useState(true);
+    const [ctxRepertoires, ctxSetRepertoires] = useState(default_repertoires);
+    const [ctxLoadingRepertoires, ctsSetLoadingRepertoire] = useState(true);
 
     useEffect(() => {
         async function fetchData() {
             fetch(`http://localhost:8080/setlists`)
             .then((response) => response.json())
             .then((data) => {
-                setRepertories(data);
-                setLoading(false);
+                ctxSetRepertoires(data);
+                ctsSetLoadingRepertoire(false);
             })
             .catch((error) => console.log('error fetching repertoires', error))
         }
@@ -25,7 +25,7 @@ export const RepertoireProvider = ({children}) => {
     }, [])
 
     return (
-        <RepertoireContext.Provider value={{ repertoires, setRepertories, loading }}>
+        <RepertoireContext.Provider value={{ ctxRepertoires, ctxSetRepertoires, ctxLoadingRepertoires }}>
             {children}
         </RepertoireContext.Provider>
     )

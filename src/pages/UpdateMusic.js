@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 export default function UpdateMusic() {
     const params = useParams()
-    const { musics, setMusics, loading } = useContext(MusicContext);
+    const { ctxMusics, ctxSetMusics, ctxLoadingMusics } = useContext(MusicContext);
     const [music, setMusic] = useState({})
     const [name, setName] = useState('')
     const [lyrics, setLyrics] = useState('')
@@ -14,10 +14,10 @@ export default function UpdateMusic() {
 
 
     useEffect(() => {
-        if(!loading) {
-            setMusic(musics.find((music) => music.id === parseInt(params.musicId)));
+        if(!ctxLoadingMusics) {
+            setMusic(ctxMusics.find((music) => music.id === parseInt(params.musicId)));
         }
-    }, [musics, loading, params.musicId]);
+    }, [ctxMusics, ctxLoadingMusics, params.musicId]);
 
     useEffect(() => {
         setName(music.name)
@@ -33,7 +33,7 @@ export default function UpdateMusic() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, lyrics, chords })
         }).then(() => {
-            setMusics(musics.map((music) => music.id === params.musicId ? { name, lyrics, chords } : music))
+            ctxSetMusics(ctxMusics.map((music) => music.id === params.musicId ? { name, lyrics, chords } : music))
 
             setName('')
             setLyrics('')
@@ -41,7 +41,7 @@ export default function UpdateMusic() {
         }).catch((error) => console.log(error))
     }
 
-    return (!loading &&
+    return (!ctxLoadingMusics &&
         <div className="container">
             <MusicForm
                 onSubmit={onUpdateMusic}

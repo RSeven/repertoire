@@ -6,17 +6,17 @@ import { MusicContext } from 'contexts/Music';
 import { useContext, useEffect, useState } from 'react';
 
 export default function Musics() {
-    const { musics, loading } = useContext(MusicContext);
+    const { ctxMusics, ctxLoadingMusics } = useContext(MusicContext);
     const [filteredMusics, setFilteredMusics] = useState([]);
 
     useEffect(() => {
-        if(!loading) setFilteredMusics(musics);
-    }, [loading, musics])
+        if(!ctxLoadingMusics) setFilteredMusics(ctxMusics);
+    }, [ctxLoadingMusics, ctxMusics])
 
 
     const onChange = (value) => {
         const normalizedValue = value.toLowerCase();
-        const matches = musics.filter((music) => music.name.toLowerCase().includes(normalizedValue));
+        const matches = ctxMusics.filter((music) => music.name.toLowerCase().includes(normalizedValue));
 
         setFilteredMusics(matches);
     }

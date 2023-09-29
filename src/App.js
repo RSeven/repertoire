@@ -8,6 +8,7 @@ import CreateMusic from 'pages/CreateMusic';
 import { MusicContextLayout } from 'contexts/Music';
 import { RepertoireContextLayout } from 'contexts/Repertoire';
 import UpdateMusic from 'pages/UpdateMusic';
+import CreateRepertoire from 'pages/CreateRepertoire';
 
 function App() {
   return (
@@ -21,7 +22,10 @@ function App() {
         </Route>
         <Route element={<RepertoireContextLayout />}>
           <Route path='repertoires' element={ <Repertoires /> } />
-          <Route path='repertoire/:repertoireId' element={ <Repertoire /> } />
+          <Route element={<MusicContextLayout />}>
+            <Route path='repertoire/:repertoireId' element={ <Repertoire /> } />
+          </Route>
+          <Route path='repertoire/create' element={ <CreateRepertoire /> } />
         </Route>
       </Routes>
     </BrowserRouter>

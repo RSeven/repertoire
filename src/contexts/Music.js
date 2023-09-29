@@ -7,16 +7,16 @@ export const MusicContext = createContext();
 MusicContext.displayName = 'Music';
 
 export const MusicProvider = ({children}) => {
-    const [musics, setMusics] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [ctxMusics, ctxSetMusics] = useState([]);
+    const [ctxLoadingMusics, ctxSetLoadingMusics] = useState(true);
     
     useEffect(() => {
         async function fetchData() {
             fetch(`http://localhost:8080/musics`)
                 .then((response) => response.json())
                 .then((data) => {
-                    setMusics(data)
-                    setLoading(false)
+                    ctxSetMusics(data)
+                    ctxSetLoadingMusics(false)
                 })
                 .catch((error) => console.log('error', error));
         }
@@ -24,7 +24,7 @@ export const MusicProvider = ({children}) => {
     }, []);
 
     return (
-        <MusicContext.Provider value={{ musics, setMusics, loading }}>
+        <MusicContext.Provider value={{ ctxMusics, ctxSetMusics, ctxLoadingMusics }}>
             {children}
         </MusicContext.Provider>
     )

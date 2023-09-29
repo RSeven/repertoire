@@ -4,7 +4,7 @@ import { MusicContext } from "contexts/Music";
 import { useContext, useState } from "react";
 
 export default function CreateMusic() {
-    const { musics, setMusics } = useContext(MusicContext);
+    const { ctxMusics, ctxSetMusics } = useContext(MusicContext);
     const [name, setName] = useState('')
     const [lyrics, setLyrics] = useState('')
     const [chords, setChords] = useState('')
@@ -17,8 +17,8 @@ export default function CreateMusic() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, lyrics, chords })
         }).then(() => {
-            setMusics([...musics, {
-                id: musics[musics.length - 1].id + 1,
+            ctxSetMusics([...ctxMusics, {
+                id: ctxMusics[ctxMusics.length - 1].id + 1,
                 name,
                 lyrics
             }])
