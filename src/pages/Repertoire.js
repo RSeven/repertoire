@@ -62,7 +62,19 @@ export default function Repertoire() {
                 setlist: {
                     name: repertoire.name,
                     date: repertoire.date,
-                    music_ids: repertoire.musics.map((m) => m.id)
+                    music_setlists_attributes: [
+                        ...repertoire.musics.map(
+                            (m, idx) => {
+                                return {
+                                    id: repertoire.music_setlists.find((ms) => ms.music_id === m.id && ms.setlist_id === repertoire.id)?.id,
+                                    music_id: m.id,
+                                    setlist_id: repertoire.id,
+                                    position: idx + 1
+                                }
+                            }),
+                        ...repertoire.music_setlists.filter((ms) => !repertoire.musics.find((m) => m.id === ms.music_id))
+                            .map((ms) => { return { id: ms.id, "_destroy": true } })
+                    ]
                 }
             })
         }).catch((error) => console.log(error))
