@@ -52,9 +52,6 @@ export default function Repertoire() {
     }
     
     function persistChange(repertoire) {
-        setRepertoire(repertoire)
-        setMusics(repertoire.musics)
-
         fetch(`http://localhost:8080/setlists/${repertoire.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -77,6 +74,11 @@ export default function Repertoire() {
                     ]
                 }
             })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            setRepertoire(data)
+            setMusics(repertoire.musics)
         }).catch((error) => console.log(error))
     }
 
